@@ -12,7 +12,7 @@ class User{
         echo "object {$this->name} created!<hr>";
     }
 
-    public function __destructor(){
+    public function __destruct(){
         echo "object {$this->name}  deleted!<hr>";
     }
 
