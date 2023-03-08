@@ -3,9 +3,10 @@ spl_autoload_register(function ($class) {
     include $class . '.class.php';
 });
 $errMsg = "";
-
-if (!empty($_POST)) require_once 'get_news.inc.php';
-
+$news = new NewsDB();
+if (!empty($_POST)) {
+    require_once 'get_news.inc.php';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@ if (!empty($_POST)) require_once 'get_news.inc.php';
 <h1>Последние новости</h1>
 <?php
 
-
+echo ($insert) ? 1:0;
 ?>
 <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
     Заголовок новости:<br/>
@@ -42,8 +43,7 @@ if (!empty($_POST)) require_once 'get_news.inc.php';
 </div>
 <?php
 
-$news = new NewsDB();
-//var_dump($news->saveNews($_POST['title'], $_POST['category'], $_POST['description'], $_POST['source']));
+
 ?>
 </body>
 </html>

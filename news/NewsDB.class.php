@@ -42,14 +42,14 @@ class NewsDB implements INewsDB
     public function saveNews($title, $category, $description, $source)
     {
         $sql='INSERT INTO msgs (title, category, description, source)
-              VALUES (:title, :category, :description, :source)';
+              VALUES ($title, $category, $description, $source)';
 
-        $this->_db->bindValue(':title', $title);
-        $this->_db->bindValue(':category', $category);
-        $this->_db->bindValue(':description', $description);
-        $this->_db->bindValue(':source', $source);
-        $this->_db->prepare($sql);
-        return $this->_db->execute();
+//        $this->_db->bindValue(':title', $title);
+//        $this->_db->bindValue(':category', $category);
+//        $this->_db->bindValue(':description', $description);
+//        $this->_db->bindValue(':source', $source);
+//        $this->_db->prepare($sql);
+        return $this->_db->exec($sql);
         // TODO: Implement saveNews() method.
     }
 }
