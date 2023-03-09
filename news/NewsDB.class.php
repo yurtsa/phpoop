@@ -36,19 +36,30 @@ class NewsDB implements INewsDB
 
     public function getNews()
     {
+        $sql = "SELECT * FROM msgs";
+//        $sql = 'SELECT msgs.id as id, title, category.name as category, description, source, datetime
+//                FROM msgs, category
+//                WHERE category.id=msgs.category
+//                ORDER BY msgs.id DESC';
+        $result = $this->_db->query($sql);
+        return $this->db2arr($result);
         // TODO: Implement getNews() method.
+    }
+
+    private function db2arr($data)
+    {
+        $arr = [];
+        while ($row = $data->fetchArray(SQLITE3_ASSOC))
+            $arr[] = $row;
+        return $arr;
     }
 
     public function saveNews($title, $category, $description, $source)
     {
-        $sql='INSERT INTO msgs (title, category, description, source)
-              VALUES ($title, $category, $description, $source)';
+        $dt = time();
+        $sql = "INSERT INTO msgs (title, category, description, source, datetime)
+              VALUES ('$title', $category, '$description', '$source', $dt)";
 
-//        $this->_db->bindValue(':title', $title);
-//        $this->_db->bindValue(':category', $category);
-//        $this->_db->bindValue(':description', $description);
-//        $this->_db->bindValue(':source', $source);
-//        $this->_db->prepare($sql);
         return $this->_db->exec($sql);
         // TODO: Implement saveNews() method.
     }
